@@ -1,0 +1,60 @@
+<div class="container mt-5">
+
+<h1 class="display-4">Sales Data Grid</h1>
+
+<!-- Search Input -->
+<h1 class="lead">Search <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+  </svg></h1>
+
+<input type="text" class="form-control mb-3 w-25" [(ngModel)]="searchQuery" (input)="applyFilter()" placeholder="Search...">
+
+<!-- Sales Tables -->
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <!-- First Header Row -->
+            <tr>
+                <ng-container *ngFor="let column of columns">
+                    <th *ngIf="!column.subHeaders" [attr.rowspan]="2" (click)="sortData(column.header)" class="text-center align-middle" style="cursor: pointer;">
+                        {{ column.header }}
+                        <span *ngIf="sortColumn === column.header">
+                            {{ sortDirection === 'asc' ? '▲' : '▼' }}
+                        </span>
+                    </th>
+                    <th *ngIf="column.subHeaders" [attr.colspan]="column.subHeaders.length" class="text-center align-middle">
+                        {{ column.header }}
+                    </th>
+                </ng-container>
+            </tr>
+            <!-- Second Header Row for SubHeaders -->
+            <tr>
+                <ng-container *ngFor="let column of columns">
+                    <ng-container *ngIf="column.subHeaders && column.subHeaders.length">
+                        <ng-container *ngFor="let subHeader of column.subHeaders">
+                            <th (click)="sortData(subHeader.header)" class="text-center" style="cursor: pointer;">
+                                {{ subHeader.header }}
+                                <span *ngIf="sortColumn === subHeader.header">
+                                    {{ sortDirection === 'asc' ? '▲' : '▼' }}
+                                </span>
+                            </th>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+            </tr>
+        </thead>
+        <!-- Sales Data -->
+        <tbody>
+            <tr *ngFor="let item of filteredData">
+                <td>{{ item.productID }}</td>
+                <td>{{ item.productName }}</td>
+                <td>{{ item.salesQ1 }}</td>
+                <td>{{ item.salesQ2 }}</td>
+                <td>{{ item.salesQ3 }}</td>
+                <td>{{ item.salesQ4 }}</td>
+                <td>{{ calculateTotalSales(item) }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>

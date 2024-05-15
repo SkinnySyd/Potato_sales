@@ -1,0 +1,30 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+    <div class="container-fluid">
+      <!-- home link -->
+      <a class="navbar-brand" routerLink="/welcome">Sales App</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <!-- sales link -->
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/welcome/sales" routerLinkActive="active" ariaCurrentWhenActive="page">Sales</a>
+          </li>
+          <!-- new product link -->
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/welcome/new-product" routerLinkActive="active" ariaCurrentWhenActive="page">New Product</a>
+          </li>
+          <!-- logout link -->
+          <li class="nav-item">
+            <button routerLink="/login" class="nav-link"  (click)="logout()">Logout</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <router-outlet></router-outlet>
+
